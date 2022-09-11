@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  privilege: MyString
+  description: MyString
+
+two:
+  privilege: MyString
+  description: MyString
