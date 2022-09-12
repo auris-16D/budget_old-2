@@ -1,0 +1,2 @@
+class BudgetSpace < ApplicationRecord
+end

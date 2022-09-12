@@ -10,7 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_10_093240) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_12_213930) do
+  create_table "actions", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "budget_spaces", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "budget_users", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "budget_space_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "is_owner"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["budget_space_id"], name: "index_budget_users_on_budget_space_id"
+    t.index ["user_id"], name: "index_budget_users_on_user_id"
+  end
+
+  create_table "resource_policies", charset: "utf8mb4", force: :cascade do |t|
+    t.string "resource_name"
+    t.bigint "action_id", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["action_id"], name: "index_resource_policies_on_action_id"
+  end
+
+  create_table "user_resource_policies", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "resource_policy_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resource_policy_id"], name: "index_user_resource_policies_on_resource_policy_id"
+    t.index ["user_id"], name: "index_user_resource_policies_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
@@ -33,4 +75,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_10_093240) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "budget_users", "budget_spaces"
+  add_foreign_key "budget_users", "users"
+  add_foreign_key "resource_policies", "actions"
+  add_foreign_key "user_resource_policies", "resource_policies"
+  add_foreign_key "user_resource_policies", "users"
 end
