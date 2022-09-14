@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'byebug'
 
 RSpec.describe GateKeeper, type: :module do
     context 'GateKeeper' do
@@ -11,7 +10,6 @@ RSpec.describe GateKeeper, type: :module do
                 let(:user_resource_policy) { UserResourcePolicy.create(user_id: user.id, resource_policy_id: resource_policy.id) }
 
                 it "expects to be granted #{action} access" do
-                user
                     budget = BudgetSpace.new
                     user_resource_policy
                     expect(budget.can_access(user.id,action)).to eq true
