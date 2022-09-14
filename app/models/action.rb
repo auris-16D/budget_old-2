@@ -9,8 +9,11 @@ class Action < ApplicationRecord
         @actions||={}
         id = @actions[action] 
         if id.nil?
-            id = Action.find_by(name: action).id
-            @actions[action]=id
+            action = Action.find_by(name: action)
+            if action.present?
+                id=action.id
+                @actions[action]=id
+            end
         end
         id
     end

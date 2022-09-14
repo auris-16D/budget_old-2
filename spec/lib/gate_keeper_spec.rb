@@ -12,7 +12,7 @@ RSpec.describe GateKeeper, type: :module do
                 it "expects to be granted #{action} access" do
                     budget = BudgetSpace.new
                     user_resource_policy
-                    expect(budget.can_access(user.id,action)).to eq true
+                    expect(budget.can_access?(user.id,action)).to eq true
                 end
             end
         end
@@ -24,7 +24,7 @@ RSpec.describe GateKeeper, type: :module do
             it "expects to be granted read access" do
                 budget = BudgetSpace.new
                 user_resource_policy
-                expect(budget.can_read(user.id)).to eq true
+                expect(budget.can_read?(user.id)).to eq true
             end
         end
     end
