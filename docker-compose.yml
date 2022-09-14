@@ -29,11 +29,10 @@ services:
   app:
     image: budget_image
     container_name: budget_app
-    command: bash -c "bundle exec rake db:create db:migrate && bundle exec rails s -p 3000 -e development -b '0.0.0.0'"
+    command: bash -c "bundle && bundle exec rake db:create db:migrate && bundle exec rails s -p 3000 -e development -b '0.0.0.0'"
     environment:
      DB_USERNAME: root
      DB_PASSWORD: root
-     DB_NAME: budget_db
      DB_PORT: 3306
      DB_HOST: mysql_db
      RAILS_ENV: development
