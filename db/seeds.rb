@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+Action.create(name: "read")
+Action.create(name: "write")
+Action.create(name: "update")
+Action.create(name: "delete")
+Action.create(name: "full")
